@@ -102,21 +102,20 @@
     left: 0;
     right: 0;
     height: 80%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
     z-index: 3;
   }
   .npc-slot {
-    width: 32vw;
-    max-width: 380px;
-    min-width: 180px;
+    position: absolute;
+    bottom: 0;
+    width: 26vw;
+    max-width: 320px;
+    min-width: 160px;
     display: flex;
     justify-content: center;
     transition: transform 0.4s ease;
   }
-  .npc-slot.left { margin-right: -4vw; }
-  .npc-slot.right { margin-left: -4vw; }
+  .npc-slot.left { left: 4%; }
+  .npc-slot.right { right: 4%; }
   .npc-slot img {
     width: 100%;
     height: auto;
@@ -129,10 +128,10 @@
   .npc-slot.speaking img {
     filter: brightness(1) saturate(1);
     opacity: 1;
-    transform: scale(1.05) translateY(-8px);
+    transform: scale(1.08) translateY(-8px);
   }
   .npc-slot.listening { z-index: 1; }
-  .npc-slot.listening img { transform: scale(0.94); }
+  .npc-slot.listening img { transform: scale(0.9); }
 
   .dialogue-wrap {
     position: absolute;
