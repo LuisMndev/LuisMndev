@@ -23,7 +23,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(10,8,20,0.15) 0%, rgba(10,8,20,0.0) 30%, rgba(10,8,20,0.75) 100%);
+    background: linear-gradient(to bottom, rgba(10,8,20,0.2) 0%, rgba(10,8,20,0.0) 30%, rgba(10,8,20,0.8) 100%);
   }
   header {
     position: absolute;
@@ -43,18 +43,11 @@
     margin-top: 4px;
     text-shadow: 0 2px 6px rgba(0,0,0,0.8);
   }
-  .hint {
-    position: absolute;
-    top: 24px;
-    right: 90px;
-    z-index: 5;
-    color: #e8e3f5;
-    font-size: 13px;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.8);
-    animation: pulse 2s infinite;
+  #toggleViewBtn {
+    margin-top: 10px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.4);
+    color: #fff; padding: 7px 14px; border-radius: 8px; cursor: pointer; font-family: inherit;
+    font-size: 12px; backdrop-filter: blur(4px);
   }
-  @keyframes pulse { 0%,100%{opacity:0.6;} 50%{opacity:1;} }
-
   #musicBtn {
     position: absolute; top: 20px; right: 20px; z-index: 10;
     background: rgba(20,15,35,0.6); border: 1px solid rgba(185,131,255,0.6);
@@ -62,41 +55,84 @@
     font-family: inherit; font-size: 13px; backdrop-filter: blur(4px);
   }
 
-  .cast {
+  .menu-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+  }
+  .menu-wrap.hidden { display: none; }
+  .menu-title {
+    color: #fff;
+    font-size: 20px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    margin-bottom: 8px;
+  }
+  .menu-btn {
+    background: rgba(12,9,24,0.75);
+    border: 1px solid rgba(185,131,255,0.5);
+    color: #f0ecff;
+    padding: 14px 34px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+    width: min(420px, 80vw);
+    backdrop-filter: blur(4px);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .menu-btn:hover { background: rgba(185,131,255,0.25); border-color: rgba(185,131,255,0.9); }
+
+  .convo-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    display: none;
+  }
+  .convo-wrap.active { display: block; }
+
+  .cast-duo {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 78%;
+    height: 80%;
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    gap: 1vw;
     z-index: 3;
-    padding: 0 2vw;
   }
-  .npc {
-    width: 15vw;
-    max-width: 175px;
-    min-width: 100px;
-    flex-shrink: 1;
-    cursor: pointer;
-    transition: filter 0.4s ease, transform 0.4s ease, opacity 0.4s ease;
-    filter: brightness(0.4) saturate(0.5);
-    opacity: 0.75;
+  .npc-slot {
+    width: 32vw;
+    max-width: 380px;
+    min-width: 180px;
+    display: flex;
+    justify-content: center;
+    transition: transform 0.4s ease;
   }
-  .npc img {
+  .npc-slot.left { margin-right: -4vw; }
+  .npc-slot.right { margin-left: -4vw; }
+  .npc-slot img {
     width: 100%;
     height: auto;
     display: block;
+    transition: filter 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+    filter: brightness(0.35) saturate(0.4);
+    opacity: 0.7;
   }
-  .npc:hover { filter: brightness(0.6) saturate(0.7); opacity: 0.9; }
-  .npc.speaking {
+  .npc-slot.speaking { z-index: 2; }
+  .npc-slot.speaking img {
     filter: brightness(1) saturate(1);
     opacity: 1;
-    transform: translateY(-6px) scale(1.02);
-    z-index: 4;
+    transform: scale(1.05) translateY(-8px);
   }
+  .npc-slot.listening { z-index: 1; }
+  .npc-slot.listening img { transform: scale(0.94); }
 
   .dialogue-wrap {
     position: absolute;
@@ -105,9 +141,7 @@
     right: 0;
     z-index: 6;
     padding: 0 5% 30px;
-    display: none;
   }
-  .dialogue-wrap.active { display: block; }
   .speaker-tag {
     display: inline-block;
     background: linear-gradient(135deg, #7f5fd6, #4a3792);
@@ -168,9 +202,8 @@
   footer a { color: #c9a8ff; text-decoration: none; margin-left: 14px; }
 
   @media (max-width: 700px) {
-    .cast { gap: 0; }
     header h1 { font-size: 22px; }
-    .hint { display: none; }
+    .npc-slot { width: 44vw; }
   }
 </style>
 </head>
@@ -181,42 +214,39 @@
   <header>
     <h1>LMdev</h1>
     <p>Un rincón de mi historia, contado por otros.</p>
-    <button id="toggleViewBtn" style="margin-top:10px; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.4); color:#fff; padding:7px 14px; border-radius:8px; cursor:pointer; font-family:inherit; font-size:12px; backdrop-filter: blur(4px);">📄 Ver versión profesional</button>
+    <button id="toggleViewBtn">📄 Ver versión profesional</button>
   </header>
 
-  <p class="hint">Toca a un personaje</p>
   <button id="musicBtn">🎵 Activar música</button>
 
   <audio id="bgm" loop>
-    <source src="assets/music/Untitled.mp3" type="audio/mpeg">
+    <source src="assets/music/Town.mp3" type="audio/mpeg">
   </audio>
 
-  <div class="cast">
-    <div class="npc" id="cerulis" data-char="cerulis">
-      <img src="assets/characters/Cerulis_stickerV2.png" alt="Cerulis">
-    </div>
-    <div class="npc" id="azen" data-char="azen">
-      <img src="assets/characters/Azen_sticker.png" alt="Azen">
-    </div>
-    <div class="npc" id="bastion" data-char="bastion">
-      <img src="assets/characters/Bastion_stickerV2.png" alt="Bastion">
-    </div>
-    <div class="npc" id="windve" data-char="windve">
-      <img src="assets/characters/Windve_stickerV2.png" alt="Windve">
-    </div>
-    <div class="npc" id="wuja" data-char="wuja">
-      <img src="assets/characters/Wuja_sticker.png" alt="Wuja">
-    </div>
+  <div class="menu-wrap" id="menuWrap">
+    <p class="menu-title">¿Qué quieres saber?</p>
+    <button class="menu-btn" data-topic="origen">¿Quién es Luis?</button>
+    <button class="menu-btn" data-topic="minidemons">El proyecto MiniDemons</button>
+    <button class="menu-btn" data-topic="qa">Su formación en QA</button>
+    <button class="menu-btn" data-topic="metas">Hacia dónde va</button>
+    <button class="menu-btn" data-topic="contratar">¿Cómo contratarlo?</button>
   </div>
 
-  <div class="dialogue-wrap" id="dialogueWrap">
-    <div class="speaker-tag" id="speakerName">???</div>
-    <div class="dialogue-box">
-      <div class="dialogue-text" id="dialogueText"></div>
-      <a id="playLink" class="play-link" href="#" target="_blank"></a>
-      <div class="controls">
-        <button id="nextBtn">Continuar ▸</button>
-        <button id="closeBtn">Cerrar</button>
+  <div class="convo-wrap" id="convoWrap">
+    <div class="cast-duo">
+      <div class="npc-slot left" id="slotLeft"><img id="imgLeft" src="" alt=""></div>
+      <div class="npc-slot right" id="slotRight"><img id="imgRight" src="" alt=""></div>
+    </div>
+
+    <div class="dialogue-wrap">
+      <div class="speaker-tag" id="speakerName">???</div>
+      <div class="dialogue-box">
+        <div class="dialogue-text" id="dialogueText"></div>
+        <a id="playLink" class="play-link" href="#" target="_blank"></a>
+        <div class="controls">
+          <button id="nextBtn">Continuar ▸</button>
+          <button id="menuBtn">◂ Volver al menú</button>
+        </div>
       </div>
     </div>
   </div>
@@ -268,69 +298,150 @@
 </div>
 
 <script>
-const stories = {
-  cerulis: {
-    name: "Cerulis",
+const charImages = {
+  cerulis: "assets/characters/Cerulis_stickerV2.png",
+  azen: "assets/characters/Azen_sticker.png",
+  bastion: "assets/characters/Bastion_stickerV2.png",
+  windve: "assets/characters/Windve_stickerV2.png",
+  wuja: "assets/characters/Wuja_sticker.png"
+};
+
+const charNames = {
+  cerulis: "Cerulis",
+  azen: "Azen",
+  bastion: "Bastion",
+  windve: "Windve",
+  wuja: "Wuja"
+};
+
+const topics = {
+  origen: {
+    participants: ["cerulis", "bastion"],
     lines: [
-      "Ah... otro visitante. Yo guardo los relatos de quien construyó este lugar.",
-      "Se llama Luis. Empezó su camino en la contabilidad, pero encontró algo más vivo en el código.",
-      "HTML, CSS, JavaScript — con esas herramientas dio sus primeros pasos como creador de mundos.",
-      "Y ahora se aventura en Godot 4, aprendiendo a moldear reinos jugables desde cero."
+      { who: "cerulis", text: "¿Quieres saber quién construyó este lugar? Se llama Luis." },
+      { who: "bastion", text: "Empezó su camino en la contabilidad, no en el código." },
+      { who: "cerulis", text: "Pero encontró algo más vivo en HTML, CSS y JavaScript. Ahí dio sus primeros pasos." },
+      { who: "bastion", text: "Y ahora se aventura en Godot 4, aprendiendo a moldear reinos jugables desde cero." }
     ]
   },
-  azen: {
-    name: "Azen",
+  minidemons: {
+    participants: ["azen", "cerulis"],
     lines: [
-      "¡Tú debes ser nuevo por aquí! Yo hablo de MiniDemons, el mundo que Luis está forjando.",
-      "21 demonias, cada una con su propia historia, sus propios objetos, su propio misterio.",
-      "Empezó en la web... y ahora lo está reconstruyendo todo en Godot, pieza por pieza.",
-      "Y no es solo una idea: ya puedes jugarlo. Está publicado en Google Play, disponible ahora mismo."
+      { who: "azen", text: "¡MiniDemons! Ese es mi tema favorito. 21 demonias, cada una con su propia historia." },
+      { who: "cerulis", text: "Empezó en la web, con HTML y JavaScript puro." },
+      { who: "azen", text: "Y ahora lo está reconstruyendo todo en Godot, pieza por pieza, sistema por sistema." },
+      { who: "azen", text: "Pero no es solo una idea: ya puedes jugarlo. Está publicado en Google Play, disponible ahora mismo." }
     ],
     link: { text: "▸ Jugar MiniDemons en Google Play", url: "https://play.google.com/store/apps/details?id=com.roluam.minidemons" }
   },
-  bastion: {
-    name: "Bastion",
+  qa: {
+    participants: ["bastion", "windve"],
     lines: [
-      "Yo protejo la calidad. Luis se formó en QA — testing manual, gestión de defectos, Jira.",
-      "No solo construye: sabe encontrar las grietas antes que nadie más las note.",
-      "Esa mezcla, crear y también poner a prueba, es poco común. Y es valiosa."
+      { who: "bastion", text: "Yo protejo la calidad. Luis se formó en QA — testing manual, gestión de defectos, Jira." },
+      { who: "windve", text: "No solo construye: sabe encontrar las grietas antes que nadie más las note." },
+      { who: "bastion", text: "Esa mezcla, crear y también poner a prueba, es poco común. Y es valiosa." }
     ]
   },
-  windve: {
-    name: "Windve",
+  metas: {
+    participants: ["windve", "wuja"],
     lines: [
-      "Sopla el viento del cambio... Luis está buscando nuevos horizontes, más allá de Chile.",
-      "Trabajo remoto, nuevos mercados, nuevas oportunidades. Está construyendo el camino paso a paso.",
-      "Si buscas a alguien con ganas reales de crecer, tal vez él sea quien buscas."
+      { who: "windve", text: "Sopla el viento del cambio... Luis está buscando nuevos horizontes, más allá de Chile." },
+      { who: "wuja", text: "Trabajo remoto, nuevos mercados, nuevas oportunidades." },
+      { who: "windve", text: "Está construyendo el camino paso a paso, sin apuro pero sin pausa." }
     ]
   },
-  wuja: {
-    name: "Wuja",
+  contratar: {
+    participants: ["wuja", "azen"],
     lines: [
-      "¿Quieres contratarlo? Puedes encontrarlo en Fiverr y Upwork, revisa los enlaces abajo.",
-      "Es honesto sobre lo que sabe y lo que está aprendiendo — no promete lo que no puede cumplir.",
-      "Eso, en este oficio, vale más de lo que parece."
+      { who: "wuja", text: "¿Quieres contratarlo? Puedes encontrarlo en Fiverr y Upwork." },
+      { who: "azen", text: "Es honesto sobre lo que sabe y lo que está aprendiendo — no promete lo que no puede cumplir." },
+      { who: "wuja", text: "Eso, en este oficio, vale más de lo que parece." }
     ]
   }
 };
 
-let currentChar = null;
+let currentTopic = null;
 let currentLine = 0;
 
-const sceneEl = document.querySelector('.scene');
-const proSection = document.getElementById('proSection');
-const toggleViewBtn = document.getElementById('toggleViewBtn');
-const toggleBackBtn = document.getElementById('toggleBackBtn');
+const menuWrap = document.getElementById('menuWrap');
+const convoWrap = document.getElementById('convoWrap');
+const slotLeft = document.getElementById('slotLeft');
+const slotRight = document.getElementById('slotRight');
+const imgLeft = document.getElementById('imgLeft');
+const imgRight = document.getElementById('imgRight');
+const speakerEl = document.getElementById('speakerName');
+const textEl = document.getElementById('dialogueText');
+const nextBtn = document.getElementById('nextBtn');
+const menuBtn = document.getElementById('menuBtn');
+const playLink = document.getElementById('playLink');
 
-toggleViewBtn.addEventListener('click', () => {
-  sceneEl.style.display = 'none';
-  proSection.style.display = 'block';
+document.querySelectorAll('.menu-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentTopic = btn.dataset.topic;
+    currentLine = 0;
+    startConvo();
+  });
 });
 
-toggleBackBtn.addEventListener('click', () => {
-  proSection.style.display = 'none';
-  sceneEl.style.display = 'block';
+function startConvo() {
+  const topic = topics[currentTopic];
+  const [leftChar, rightChar] = topic.participants;
+  imgLeft.src = charImages[leftChar];
+  imgLeft.alt = charNames[leftChar];
+  imgRight.src = charImages[rightChar];
+  imgRight.alt = charNames[rightChar];
+  slotLeft.dataset.char = leftChar;
+  slotRight.dataset.char = rightChar;
+
+  menuWrap.classList.add('hidden');
+  convoWrap.classList.add('active');
+  renderLine();
+}
+
+function renderLine() {
+  const topic = topics[currentTopic];
+  const line = topic.lines[currentLine];
+  speakerEl.textContent = charNames[line.who];
+  textEl.textContent = line.text;
+
+  const leftChar = slotLeft.dataset.char;
+  const rightChar = slotRight.dataset.char;
+  slotLeft.classList.toggle('speaking', line.who === leftChar);
+  slotLeft.classList.toggle('listening', line.who !== leftChar);
+  slotRight.classList.toggle('speaking', line.who === rightChar);
+  slotRight.classList.toggle('listening', line.who !== rightChar);
+
+  const isLast = currentLine === topic.lines.length - 1;
+  nextBtn.textContent = isLast ? 'Fin ✓' : 'Continuar ▸';
+
+  if (topic.link && isLast) {
+    playLink.href = topic.link.url;
+    playLink.textContent = topic.link.text;
+    playLink.style.display = 'inline-block';
+  } else {
+    playLink.style.display = 'none';
+  }
+}
+
+nextBtn.addEventListener('click', () => {
+  const topic = topics[currentTopic];
+  if (currentLine < topic.lines.length - 1) {
+    currentLine++;
+    renderLine();
+  } else {
+    backToMenu();
+  }
 });
+
+menuBtn.addEventListener('click', backToMenu);
+
+function backToMenu() {
+  convoWrap.classList.remove('active');
+  menuWrap.classList.remove('hidden');
+  slotLeft.classList.remove('speaking', 'listening');
+  slotRight.classList.remove('speaking', 'listening');
+  currentTopic = null;
+}
 
 const bgm = document.getElementById('bgm');
 const musicBtn = document.getElementById('musicBtn');
@@ -348,67 +459,20 @@ musicBtn.addEventListener('click', () => {
   musicPlaying = !musicPlaying;
 });
 
-const wrap = document.getElementById('dialogueWrap');
-const speakerEl = document.getElementById('speakerName');
-const textEl = document.getElementById('dialogueText');
-const nextBtn = document.getElementById('nextBtn');
-const closeBtn = document.getElementById('closeBtn');
-const playLink = document.getElementById('playLink');
-const allNpcs = document.querySelectorAll('.npc');
+const sceneEl = document.querySelector('.scene');
+const proSection = document.getElementById('proSection');
+const toggleViewBtn = document.getElementById('toggleViewBtn');
+const toggleBackBtn = document.getElementById('toggleBackBtn');
 
-allNpcs.forEach(npc => {
-  npc.addEventListener('click', () => {
-    currentChar = npc.dataset.char;
-    currentLine = 0;
-    openDialogue();
-  });
+toggleViewBtn.addEventListener('click', () => {
+  sceneEl.style.display = 'none';
+  proSection.style.display = 'block';
 });
 
-function openDialogue() {
-  const story = stories[currentChar];
-  allNpcs.forEach(npc => npc.classList.toggle('speaking', npc.dataset.char === currentChar));
-  speakerEl.textContent = story.name;
-  textEl.textContent = story.lines[currentLine];
-  wrap.classList.add('active');
-  updateNextLabel();
-  updateLink(story);
-}
-
-function updateNextLabel() {
-  const story = stories[currentChar];
-  nextBtn.textContent = currentLine < story.lines.length - 1 ? 'Continuar ▸' : 'Fin ✓';
-}
-
-function updateLink(story) {
-  const isLastLine = currentLine === story.lines.length - 1;
-  if (story.link && isLastLine) {
-    playLink.href = story.link.url;
-    playLink.textContent = story.link.text;
-    playLink.style.display = 'inline-block';
-  } else {
-    playLink.style.display = 'none';
-  }
-}
-
-nextBtn.addEventListener('click', () => {
-  const story = stories[currentChar];
-  if (currentLine < story.lines.length - 1) {
-    currentLine++;
-    textEl.textContent = story.lines[currentLine];
-    updateNextLabel();
-    updateLink(story);
-  } else {
-    closeDialogue();
-  }
+toggleBackBtn.addEventListener('click', () => {
+  proSection.style.display = 'none';
+  sceneEl.style.display = 'block';
 });
-
-closeBtn.addEventListener('click', closeDialogue);
-
-function closeDialogue() {
-  wrap.classList.remove('active');
-  allNpcs.forEach(npc => npc.classList.remove('speaking'));
-  currentChar = null;
-}
 </script>
 
 </body>
