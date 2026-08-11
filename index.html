@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>LMdev — Portfolio</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: radial-gradient(ellipse at top, #1a1530 0%, #0d0a1a 60%, #050408 100%);
+    min-height: 100vh;
+    font-family: 'Georgia', serif;
+    color: #e8e3f5;
+    overflow-x: hidden;
+    position: relative;
+  }
+  .stars {
+    position: fixed; inset: 0; pointer-events: none;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, white, transparent),
+      radial-gradient(1px 1px at 60% 70%, white, transparent),
+      radial-gradient(1px 1px at 80% 20%, white, transparent),
+      radial-gradient(1px 1px at 40% 80%, white, transparent),
+      radial-gradient(2px 2px at 90% 50%, white, transparent);
+    background-size: 400px 400px;
+    opacity: 0.4;
+  }
+  header {
+    text-align: center;
+    padding: 50px 20px 20px;
+    position: relative;
+    z-index: 2;
+  }
+  header h1 {
+    font-size: 42px;
+    color: #b983ff;
+    letter-spacing: 4px;
+    text-shadow: 0 0 20px rgba(185,131,255,0.5);
+  }
+  header p {
+    color: #a99fc7;
+    margin-top: 8px;
+    font-size: 15px;
+    letter-spacing: 1px;
+  }
+  .hint {
+    text-align: center;
+    color: #8a7fb0;
+    font-size: 13px;
+    margin-bottom: 10px;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:0.5;} 50%{opacity:1;} }
+  .scene {
+    position: relative;
+    height: 340px;
+    max-width: 900px;
+    margin: 0 auto;
+    border-bottom: 2px solid rgba(185,131,255,0.2);
+    overflow: hidden;
+    z-index: 2;
+  }
+  .npc {
+    position: absolute;
+    bottom: 0;
+    width: 130px;
+    cursor: pointer;
+    transition: filter 0.2s;
+    filter: drop-shadow(0 0 8px rgba(185,131,255,0.15));
+  }
+  .npc:hover { filter: drop-shadow(0 0 16px rgba(185,131,255,0.6)); }
+  .npc img { width: 100%; display: block; }
+  .npc .name-tag {
+    text-align: center;
+    font-size: 12px;
+    color: #d4c8f0;
+    background: rgba(20,15,35,0.7);
+    border: 1px solid rgba(185,131,255,0.3);
+    border-radius: 6px;
+    padding: 2px 6px;
+    margin-bottom: 4px;
+  }
+  #cerulis { left: 5%; animation: patrol1 9s ease-in-out infinite; }
+  #azen { left: 25%; animation: patrol2 7s ease-in-out infinite; }
+  #bastion { left: 45%; animation: patrol3 10s ease-in-out infinite; }
+  #windve { left: 65%; animation: patrol1 8s ease-in-out infinite reverse; }
+  #wuja { left: 82%; animation: patrol2 6.5s ease-in-out infinite reverse; }
+
+  @keyframes patrol1 { 0%,100% { transform: translateX(0); } 50% { transform: translateX(30px); } }
+  @keyframes patrol2 { 0%,100% { transform: translateX(0); } 50% { transform: translateX(-25px); } }
+  @keyframes patrol3 { 0%,100% { transform: translateX(0); } 50% { transform: translateX(20px); } }
+
+  .dialogue-box {
+    max-width: 700px;
+    margin: 20px auto 60px;
+    background: rgba(20,15,35,0.9);
+    border: 1px solid rgba(185,131,255,0.4);
+    border-radius: 12px;
+    padding: 24px 28px;
+    display: none;
+    position: relative;
+    z-index: 3;
+  }
+  .dialogue-box.active { display: block; }
+  .speaker {
+    color: #b983ff;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .dialogue-text {
+    font-size: 17px;
+    line-height: 1.6;
+    color: #e8e3f5;
+    min-height: 60px;
+  }
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .controls button {
+    background: rgba(185,131,255,0.15);
+    border: 1px solid rgba(185,131,255,0.5);
+    color: #d4c8f0;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+  }
+  .controls button:hover { background: rgba(185,131,255,0.3); }
+  footer {
+    text-align: center;
+    padding: 30px 20px 50px;
+    color: #6f6590;
+    font-size: 13px;
+    position: relative;
+    z-index: 2;
+  }
+  footer a { color: #b983ff; text-decoration: none; margin: 0 10px; }
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+
+<header>
+  <h1>LMdev</h1>
+  <p>Un rincón de mi historia, contado por otros.</p>
+</header>
+
+<p class="hint">Toca a un personaje para que te cuente algo</p>
+
+<div class="scene">
+  <div class="npc" id="cerulis" data-char="cerulis">
+    <div class="name-tag">Cerulis</div>
+    <img src="assets/characters/Cerulis_stickerV2.png" alt="Cerulis">
+  </div>
+  <div class="npc" id="azen" data-char="azen">
+    <div class="name-tag">Azen</div>
+    <img src="assets/characters/Azen_sticker.png" alt="Azen">
+  </div>
+  <div class="npc" id="bastion" data-char="bastion">
+    <div class="name-tag">Bastion</div>
+    <img src="assets/characters/Bastion_stickerV2.png" alt="Bastion">
+  </div>
+  <div class="npc" id="windve" data-char="windve">
+    <div class="name-tag">Windve</div>
+    <img src="assets/characters/Windve_stickerV2.png" alt="Windve">
+  </div>
+  <div class="npc" id="wuja" data-char="wuja">
+    <div class="name-tag">Wuja</div>
+    <img src="assets/characters/Wuja_sticker.png" alt="Wuja">
+  </div>
+</div>
+
+<div class="dialogue-box" id="dialogueBox">
+  <div class="speaker" id="speakerName">???</div>
+  <div class="dialogue-text" id="dialogueText"></div>
+  <a id="playLink" href="#" target="_blank" style="display:none; color:#b983ff; font-size:14px; text-decoration:none; margin-top:10px; display:none;"></a>
+  <div class="controls">
+    <button id="nextBtn">Continuar ▸</button>
+    <button id="closeBtn">Cerrar</button>
+  </div>
+</div>
+
+<footer>
+  <a href="https://www.fiverr.com/" target="_blank">Fiverr</a>
+  <a href="https://www.upwork.com/" target="_blank">Upwork</a>
+  <a href="https://github.com/LuisMndev" target="_blank">GitHub</a>
+</footer>
+
+<script>
+const stories = {
+  cerulis: {
+    name: "Cerulis",
+    lines: [
+      "Ah... otro visitante. Yo guardo los relatos de quien construyó este lugar.",
+      "Se llama Luis. Empezó su camino en la contabilidad, pero encontró algo más vivo en el código.",
+      "HTML, CSS, JavaScript — con esas herramientas dio sus primeros pasos como creador de mundos.",
+      "Y ahora se aventura en Godot 4, aprendiendo a moldear reinos jugables desde cero."
+    ]
+  },
+  azen: {
+    name: "Azen",
+    lines: [
+      "¡Tú debes ser nuevo por aquí! Yo hablo de MiniDemons, el mundo que Luis está forjando.",
+      "21 demonias, cada una con su propia historia, sus propios objetos, su propio misterio.",
+      "Empezó en la web... y ahora lo está reconstruyendo todo en Godot, pieza por pieza.",
+      "Y no es solo una idea: ya puedes jugarlo. Está publicado en Google Play, disponible ahora mismo."
+    ],
+    link: { text: "▸ Jugar MiniDemons en Google Play", url: "https://play.google.com/store/apps/details?id=com.roluam.minidemons" }
+  },
+  bastion: {
+    name: "Bastion",
+    lines: [
+      "Yo protejo la calidad. Luis se formó en QA — testing manual, gestión de defectos, Jira.",
+      "No solo construye: sabe encontrar las grietas antes que nadie más las note.",
+      "Esa mezcla, crear y también poner a prueba, es poco común. Y es valiosa."
+    ]
+  },
+  windve: {
+    name: "Windve",
+    lines: [
+      "Sopla el viento del cambio... Luis está buscando nuevos horizontes, más allá de Chile.",
+      "Trabajo remoto, nuevos mercados, nuevas oportunidades. Está construyendo el camino paso a paso.",
+      "Si buscas a alguien con ganas reales de crecer, tal vez él sea quien buscas."
+    ]
+  },
+  wuja: {
+    name: "Wuja",
+    lines: [
+      "¿Quieres contratarlo? Puedes encontrarlo en Fiverr y Upwork, revisa los enlaces abajo.",
+      "Es honesto sobre lo que sabe y lo que está aprendiendo — no promete lo que no puede cumplir.",
+      "Eso, en este oficio, vale más de lo que parece."
+    ]
+  }
+};
+
+let currentChar = null;
+let currentLine = 0;
+
+const box = document.getElementById('dialogueBox');
+const speakerEl = document.getElementById('speakerName');
+const textEl = document.getElementById('dialogueText');
+const nextBtn = document.getElementById('nextBtn');
+const closeBtn = document.getElementById('closeBtn');
+
+document.querySelectorAll('.npc').forEach(npc => {
+  npc.addEventListener('click', () => {
+    currentChar = npc.dataset.char;
+    currentLine = 0;
+    openDialogue();
+  });
+});
+
+const playLink = document.getElementById('playLink');
+
+function openDialogue() {
+  const story = stories[currentChar];
+  speakerEl.textContent = story.name;
+  textEl.textContent = story.lines[currentLine];
+  box.classList.add('active');
+  box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  updateNextLabel();
+  updateLink(story);
+}
+
+function updateLink(story) {
+  const isLastLine = currentLine === story.lines.length - 1;
+  if (story.link && isLastLine) {
+    playLink.href = story.link.url;
+    playLink.textContent = story.link.text;
+    playLink.style.display = 'inline-block';
+  } else {
+    playLink.style.display = 'none';
+  }
+}
+
+function updateNextLabel() {
+  const story = stories[currentChar];
+  nextBtn.textContent = currentLine < story.lines.length - 1 ? 'Continuar ▸' : 'Fin ✓';
+}
+
+nextBtn.addEventListener('click', () => {
+  const story = stories[currentChar];
+  if (currentLine < story.lines.length - 1) {
+    currentLine++;
+    textEl.textContent = story.lines[currentLine];
+    updateNextLabel();
+    updateLink(story);
+  } else {
+    box.classList.remove('active');
+  }
+});
+
+closeBtn.addEventListener('click', () => {
+  box.classList.remove('active');
+});
+</script>
+
+</body>
+</html>
