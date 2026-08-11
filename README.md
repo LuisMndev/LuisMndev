@@ -1,85 +1,110 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=2,6,12,18&height=200&section=header&text=LMdev&fontSize=60&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Web%20%26%20Godot%20Game%20Developer&descAlignY=55&descSize=20" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,12,18,24&height=220&section=header&text=LMdev&fontSize=60&fontColor=ffffff&animation=fadeIn&fontAlignY=32&desc=Developer%20%7C%20World-builder%20%7C%20Quality%20Seeker&descAlignY=52&descSize=18" width="100%"/>
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=8A2BE2&center=true&vCenter=true&width=600&lines=Building+worlds+in+HTML%2FCSS%2FJS;Migrating+to+Godot+4;Creator+of+MiniDemons;QA+Tester+%7C+ISTQB+trained" alt="Typing SVG" />
+<img src="https://readme-typing-svg.demolab.com?font=Cinzel&pause=1200&color=B983FF&center=true&vCenter=true&width=650&lines=Forging+worlds+in+HTML%2C+CSS+%26+JavaScript;Crafting+MiniDemons+in+Godot+4;Guardian+of+Quality+%E2%80%94+ISTQB+trained;Currently+leveling+up..." alt="Typing SVG" />
 
 </div>
 
 ---
 
-### 👾 About me
+## 📜 Character Sheet
 
 ```yaml
-developer:
-  name: LMdev
-  location: Santiago, Chile 🇨🇱
-  focus: [Web Development, Godot 4 Game Dev, QA Testing]
-  currently_building: MiniDemons — idle/clicker game (ES/EN/JA)
-  languages_spoken: [Spanish (native), English (conversational)]
-  status: "Open for freelance work 🟢"
+name: LMdev
+class: Full-Stack Adventurer
+origin: Santiago, Chile 🇨🇱
+guild: Independent
+languages: [Spanish (native), English (conversational)]
+current_quest: "Migrating MiniDemons to the Godot 4 realm"
+status: 🟢 Available for hire
 ```
 
-I'm a developer with a solid foundation in **HTML, CSS and JavaScript**, currently migrating my main project into **Godot 4**. I also hold QA training (manual testing, Jira, ISTQB CTFL fundamentals), so I don't just build — I know how to break things properly before a client's users do.
+I'm a developer with a solid foundation in **HTML, CSS and JavaScript**, currently venturing into **Godot 4** to build my own worlds. I also carry QA training (manual testing, Jira, ISTQB CTFL fundamentals) — think of it as my *scouting skill*: I find what's broken before it finds your players.
 
-- 🎮 Building **MiniDemons**, an idle/clicker game with 21 characters, deep progression systems and multilingual content (ES/EN/JA)
-- 🧪 QA-trained: test design, bug tracking in Jira, manual testing best practices
-- 🌱 Currently leveling up in Godot 4 / GDScript
-- 💼 Open to freelance web dev, Godot prototyping, and QA testing gigs
+- 🎮 Building **MiniDemons**, an idle/clicker realm with 21 characters, deep progression systems, and lore in three tongues (ES/EN/JA)
+- 🧪 QA-trained — test design, bug tracking in Jira, manual testing best practices
+- 🌱 Currently grinding XP in Godot 4 / GDScript
+- 💼 Open to freelance web dev, Godot prototyping, and QA testing quests
 
 ---
 
-### ⚔️ Tech Stack
+## ⚔️ Inventory (Tech Stack)
 
 <div align="center">
 
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![Godot](https://img.shields.io/badge/Godot_4-478CBF?style=for-the-badge&logo=godotengine&logoColor=white)
-![Jira](https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=jira&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-6C2BD9?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-6C2BD9?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-B983FF?style=for-the-badge&logo=javascript&logoColor=black)
+![Godot](https://img.shields.io/badge/Godot_4-6C2BD9?style=for-the-badge&logo=godotengine&logoColor=white)
+![Jira](https://img.shields.io/badge/Jira-B983FF?style=for-the-badge&logo=jira&logoColor=black)
+![Git](https://img.shields.io/badge/Git-6C2BD9?style=for-the-badge&logo=git&logoColor=white)
 
 </div>
 
 ---
 
-### 📊 GitHub Stats
+## 📊 Guild Stats
 
 <div align="center">
 
-<img height="165" src="https://github-readme-stats.vercel.app/api?username=LuisMndev&show_icons=true&theme=radical&hide_border=true&bg_color=0d1117&title_color=8A2BE2&icon_color=8A2BE2"/>
-<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=LuisMndev&layout=compact&theme=radical&hide_border=true&bg_color=0d1117&title_color=8A2BE2"/>
+<img height="165" src="https://github-readme-stats.vercel.app/api?username=LuisMndev&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=B983FF&icon_color=B983FF&text_color=c9d1d9"/>
+<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=LuisMndev&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=B983FF&text_color=c9d1d9"/>
 
 <br/>
 
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=LuisMndev&theme=radical&hide_border=true&background=0d1117&ring=8A2BE2&fire=8A2BE2"/>
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=LuisMndev&theme=tokyonight&hide_border=true&background=0d1117&ring=B983FF&fire=B983FF&currStreakLabel=B983FF"/>
 
 </div>
 
 ---
 
-### 📌 Featured Project
+## 🏰 Featured Realm
 
 <div align="center">
 
 <a href="#">
-<img src="https://github-readme-stats.vercel.app/api/pin/?username=LuisMndev&repo=MiniDemons&theme=radical&hide_border=true&bg_color=0d1117&title_color=8A2BE2"/>
+<img src="https://github-readme-stats.vercel.app/api/pin/?username=LuisMndev&repo=MiniDemons&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=B983FF&text_color=c9d1d9"/>
 </a>
+
+*An idle/clicker world of 21 demonias, ancient item systems, and lore whispered in three languages.*
 
 </div>
 
 ---
 
-### 🔗 Find me
+## 🎴 Meet the Cast
 
 <div align="center">
 
-<a href="https://www.fiverr.com/" target="_blank"><img src="https://img.shields.io/badge/Fiverr-1DBF73?style=for-the-badge&logo=fiverr&logoColor=white"/></a>
-<a href="https://www.upwork.com/" target="_blank"><img src="https://img.shields.io/badge/Upwork-6FDA44?style=for-the-badge&logo=upwork&logoColor=white"/></a>
+<table>
+<tr>
+<td align="center"><img src="assets/characters/Bethany_sticker.png" width="150"/><br/><b>Bethany</b></td>
+<td align="center"><img src="assets/characters/Karina_sticker.png" width="150"/><br/><b>Karina</b></td>
+<td align="center"><img src="assets/characters/Cerulis_sticker.png" width="150"/><br/><b>Cerulis</b></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/characters/Nanie_sticker.png" width="150"/><br/><b>Nanie</b></td>
+<td align="center"><img src="assets/characters/Asolde_stickerV2.png" width="150"/><br/><b>Asolde</b></td>
+<td align="center"><img src="assets/characters/Bastion_sticker.png" width="150"/><br/><b>Bastion</b></td>
+</tr>
+</table>
+
+*A glimpse of the demonias awaiting in MiniDemons — each with their own lore, items, and story.*
+
+</div>
+
+---
+
+## 🗺️ Find me across the realms
+
+<div align="center">
+
+<a href="https://www.fiverr.com/" target="_blank"><img src="https://img.shields.io/badge/Fiverr-6C2BD9?style=for-the-badge&logo=fiverr&logoColor=white"/></a>
+<a href="https://www.upwork.com/" target="_blank"><img src="https://img.shields.io/badge/Upwork-6C2BD9?style=for-the-badge&logo=upwork&logoColor=white"/></a>
 
 </div>
 
 <div align="center">
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=2,6,12,18&height=100&section=footer"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,12,18,24&height=100&section=footer"/>
 </div>
