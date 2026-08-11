@@ -50,6 +50,12 @@
     font-size: 12px; backdrop-filter: blur(4px);
   }
   #musicBtn {
+    position: absolute; top: 20px; right: 96px; z-index: 10;
+    background: rgba(20,15,35,0.6); border: 1px solid rgba(185,131,255,0.6);
+    color: #f0ecff; padding: 8px 14px; border-radius: 8px; cursor: pointer;
+    font-family: inherit; font-size: 13px; backdrop-filter: blur(4px);
+  }
+  #langBtn {
     position: absolute; top: 20px; right: 20px; z-index: 10;
     background: rgba(20,15,35,0.6); border: 1px solid rgba(185,131,255,0.6);
     color: #f0ecff; padding: 8px 14px; border-radius: 8px; cursor: pointer;
@@ -199,11 +205,12 @@
 
   <header>
     <h1>LMdev</h1>
-    <p>Un rincón de mi historia, contado por otros.</p>
+    <p id="headerSubtitle">Un rincón de mi historia, contado por otros.</p>
     <button id="toggleViewBtn">📄 Ver versión profesional</button>
   </header>
 
   <button id="musicBtn">🎵 Activar música</button>
+  <button id="langBtn">🌐 English</button>
 
   <audio id="bgm" loop>
     <source src="assets/music/Town.mp3" type="audio/mpeg">
@@ -215,11 +222,11 @@
   </div>
 
   <div class="topic-bar">
-    <button class="menu-btn" data-topic="origen">¿Quién es Luis?</button>
-    <button class="menu-btn" data-topic="minidemons">MiniDemons</button>
-    <button class="menu-btn" data-topic="qa">Formación QA</button>
-    <button class="menu-btn" data-topic="metas">Hacia dónde va</button>
-    <button class="menu-btn" data-topic="contratar">¿Cómo contratarlo?</button>
+    <button class="menu-btn" data-topic="origen"></button>
+    <button class="menu-btn" data-topic="minidemons"></button>
+    <button class="menu-btn" data-topic="qa"></button>
+    <button class="menu-btn" data-topic="metas"></button>
+    <button class="menu-btn" data-topic="contratar"></button>
   </div>
 
   <div class="dialogue-wrap">
@@ -242,15 +249,13 @@
 
 <div id="proSection" style="display:none; min-height:100vh; background:#0d0a1a; padding:50px 6% 60px; font-family: Georgia, serif;">
   <div style="max-width:820px; margin:0 auto;">
-    <button id="toggleBackBtn" style="background:rgba(185,131,255,0.15); border:1px solid rgba(185,131,255,0.5); color:#f0ecff; padding:8px 16px; border-radius:8px; cursor:pointer; font-family:inherit; font-size:13px; margin-bottom:30px;">🎮 Ver como novela visual</button>
+    <button id="toggleBackBtn" style="background:rgba(185,131,255,0.15); border:1px solid rgba(185,131,255,0.5); color:#f0ecff; padding:8px 16px; border-radius:8px; cursor:pointer; font-family:inherit; font-size:13px; margin-bottom:30px;"></button>
 
     <h1 style="color:#fff; font-size:34px; letter-spacing:1px;">LMdev</h1>
-    <p style="color:#c9a8ff; font-size:16px; margin-top:6px;">Web & Godot Game Developer</p>
-    <p style="color:#b3a9cc; font-size:15px; line-height:1.6; margin-top:18px; max-width:600px;">
-      Developer with a solid foundation in HTML, CSS and JavaScript, currently expanding into game development with Godot 4. Creator of MiniDemons, an idle/clicker game featuring deep progression systems and multilingual content. QA-trained (manual testing, Jira, ISTQB CTFL fundamentals). Available for freelance web development, Godot prototyping, and QA testing.
-    </p>
+    <p id="proRole" style="color:#c9a8ff; font-size:16px; margin-top:6px;"></p>
+    <p id="proDesc" style="color:#b3a9cc; font-size:15px; line-height:1.6; margin-top:18px; max-width:600px;"></p>
 
-    <h2 style="color:#fff; font-size:20px; margin-top:40px; border-bottom:1px solid rgba(255,255,255,0.15); padding-bottom:10px;">Skills</h2>
+    <h2 id="proSkillsHeading" style="color:#fff; font-size:20px; margin-top:40px; border-bottom:1px solid rgba(255,255,255,0.15); padding-bottom:10px;"></h2>
     <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:16px;">
       <span style="background:rgba(185,131,255,0.15); color:#e0d4ff; padding:6px 14px; border-radius:20px; font-size:13px; border:1px solid rgba(185,131,255,0.35);">HTML5</span>
       <span style="background:rgba(185,131,255,0.15); color:#e0d4ff; padding:6px 14px; border-radius:20px; font-size:13px; border:1px solid rgba(185,131,255,0.35);">CSS3</span>
@@ -260,16 +265,14 @@
       <span style="background:rgba(185,131,255,0.15); color:#e0d4ff; padding:6px 14px; border-radius:20px; font-size:13px; border:1px solid rgba(185,131,255,0.35);">Jira</span>
     </div>
 
-    <h2 style="color:#fff; font-size:20px; margin-top:40px; border-bottom:1px solid rgba(255,255,255,0.15); padding-bottom:10px;">Featured project</h2>
+    <h2 id="proProjectHeading" style="color:#fff; font-size:20px; margin-top:40px; border-bottom:1px solid rgba(255,255,255,0.15); padding-bottom:10px;"></h2>
     <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.12); border-radius:12px; padding:20px 24px; margin-top:16px;">
       <p style="color:#fff; font-size:17px; font-weight:bold;">MiniDemons</p>
-      <p style="color:#b3a9cc; font-size:14px; line-height:1.6; margin-top:8px;">
-        Idle/clicker game with 21 characters, deep progression systems and multilingual content (ES/EN/JA). Originally built in HTML/CSS/JS, currently migrating to Godot 4. Published and available on Google Play.
-      </p>
-      <a href="https://play.google.com/store/apps/details?id=com.roluam.minidemons" target="_blank" style="display:inline-block; margin-top:12px; color:#c9a8ff; font-size:14px; text-decoration:none;">▸ Ver en Google Play</a>
+      <p id="proProjectDesc" style="color:#b3a9cc; font-size:14px; line-height:1.6; margin-top:8px;"></p>
+      <a id="proProjectLink" href="https://play.google.com/store/apps/details?id=com.roluam.minidemons" target="_blank" style="display:inline-block; margin-top:12px; color:#c9a8ff; font-size:14px; text-decoration:none;"></a>
     </div>
 
-    <h2 style="color:#fff; font-size:20px; margin-top:40px; border-bottom:1px solid rgba(255,255,255,0.15); padding-bottom:10px;">Contact / Hire me</h2>
+    <h2 id="proContactHeading" style="color:#fff; font-size:20px; margin-top:40px; border-bottom:1px solid rgba(255,255,255,0.15); padding-bottom:10px;"></h2>
     <div style="display:flex; gap:14px; margin-top:16px; flex-wrap:wrap;">
       <a href="https://www.fiverr.com/" target="_blank" id="fiverrLink2" style="background:rgba(185,131,255,0.15); color:#f0ecff; padding:9px 20px; border-radius:8px; text-decoration:none; font-size:14px; border:1px solid rgba(185,131,255,0.4);">Fiverr</a>
       <a href="https://github.com/LuisMndev" target="_blank" style="background:rgba(185,131,255,0.15); color:#f0ecff; padding:9px 20px; border-radius:8px; text-decoration:none; font-size:14px; border:1px solid rgba(185,131,255,0.4);">GitHub</a>
@@ -294,53 +297,151 @@ const charNames = {
   wuja: "Wuja"
 };
 
-const topics = {
-  origen: {
-    participants: ["cerulis", "bastion"],
-    lines: [
-      { who: "cerulis", text: "¿Quieres saber quién construyó este lugar? Se llama Luis." },
-      { who: "bastion", text: "Empezó su camino en la contabilidad, no en el código." },
-      { who: "cerulis", text: "Pero encontró algo más vivo en HTML, CSS y JavaScript. Ahí dio sus primeros pasos." },
-      { who: "bastion", text: "Y ahora se aventura en Godot 4, aprendiendo a moldear reinos jugables desde cero." }
-    ]
+const ui = {
+  es: {
+    headerSubtitle: "Un rincón de mi historia, contado por otros.",
+    toggleViewBtn: "📄 Ver versión profesional",
+    toggleBackBtn: "🎮 Ver como novela visual",
+    langBtn: "🌐 English",
+    placeholderText: "Elige un tema arriba para empezar.",
+    continueBtn: "Continuar ▸",
+    finBtn: "Fin ✓",
+    menuLabels: {
+      origen: "¿Quién es Luis?",
+      minidemons: "MiniDemons",
+      qa: "Formación QA",
+      metas: "Hacia dónde va",
+      contratar: "¿Cómo contratarlo?"
+    },
+    proRole: "Desarrollador Web y de Videojuegos en Godot",
+    proDesc: "Desarrollador con base sólida en HTML, CSS y JavaScript, actualmente expandiéndose hacia el desarrollo de videojuegos con Godot 4. Creador de MiniDemons, un juego idle/clicker con sistemas de progresión profundos y contenido multilenguaje. Formación en QA (testing manual, Jira, fundamentos ISTQB CTFL). Disponible para desarrollo web freelance, prototipado en Godot, y testing QA.",
+    proSkillsHeading: "Habilidades",
+    proProjectHeading: "Proyecto destacado",
+    proProjectDesc: "Juego idle/clicker con 21 personajes, sistemas de progresión profundos y contenido multilenguaje (ES/EN/JA). Construido originalmente en HTML/CSS/JS, actualmente migrando a Godot 4. Publicado y disponible en Google Play.",
+    proProjectLink: "▸ Ver en Google Play",
+    proContactHeading: "Contacto / Contrátame"
   },
-  minidemons: {
-    participants: ["azen", "cerulis"],
-    lines: [
-      { who: "azen", text: "¡MiniDemons! Ese es mi tema favorito. 21 demonias, cada una con su propia historia." },
-      { who: "cerulis", text: "Empezó en la web, con HTML y JavaScript puro." },
-      { who: "azen", text: "Y ahora lo está reconstruyendo todo en Godot, pieza por pieza, sistema por sistema." },
-      { who: "azen", text: "Pero no es solo una idea: ya puedes jugarlo. Está publicado en Google Play, disponible ahora mismo." }
-    ],
-    link: { text: "▸ Jugar MiniDemons en Google Play", url: "https://play.google.com/store/apps/details?id=com.roluam.minidemons" }
-  },
-  qa: {
-    participants: ["bastion", "windve"],
-    lines: [
-      { who: "bastion", text: "Yo protejo la calidad. Luis se formó en QA — testing manual, gestión de defectos, Jira." },
-      { who: "windve", text: "No solo construye: sabe encontrar las grietas antes que nadie más las note." },
-      { who: "bastion", text: "Esa mezcla, crear y también poner a prueba, es poco común. Y es valiosa." }
-    ]
-  },
-  metas: {
-    participants: ["windve", "wuja"],
-    lines: [
-      { who: "windve", text: "Sopla el viento del cambio... Luis está buscando nuevos horizontes, más allá de Chile." },
-      { who: "wuja", text: "Trabajo remoto, nuevos mercados, nuevas oportunidades." },
-      { who: "windve", text: "Está construyendo el camino paso a paso, sin apuro pero sin pausa." }
-    ]
-  },
-  contratar: {
-    participants: ["wuja", "azen"],
-    lines: [
-      { who: "wuja", text: "¿Quieres contratarlo? Puedes encontrarlo en Fiverr." },
-      { who: "azen", text: "Es honesto sobre lo que sabe y lo que está aprendiendo — no promete lo que no puede cumplir." },
-      { who: "wuja", text: "Eso, en este oficio, vale más de lo que parece." }
-    ],
-    link: { text: "▸ Ver perfil en Fiverr", url: "https://www.fiverr.com/" }
+  en: {
+    headerSubtitle: "A corner of my story, told by others.",
+    toggleViewBtn: "📄 View professional version",
+    toggleBackBtn: "🎮 View as visual novel",
+    langBtn: "🌐 Español",
+    placeholderText: "Choose a topic above to begin.",
+    continueBtn: "Continue ▸",
+    finBtn: "The End ✓",
+    menuLabels: {
+      origen: "Who is Luis?",
+      minidemons: "MiniDemons",
+      qa: "QA background",
+      metas: "Where he's headed",
+      contratar: "How to hire him"
+    },
+    proRole: "Web & Godot Game Developer",
+    proDesc: "Developer with a solid foundation in HTML, CSS and JavaScript, currently expanding into game development with Godot 4. Creator of MiniDemons, an idle/clicker game featuring deep progression systems and multilingual content. QA-trained (manual testing, Jira, ISTQB CTFL fundamentals). Available for freelance web development, Godot prototyping, and QA testing.",
+    proSkillsHeading: "Skills",
+    proProjectHeading: "Featured project",
+    proProjectDesc: "Idle/clicker game with 21 characters, deep progression systems and multilingual content (ES/EN/JA). Originally built in HTML/CSS/JS, currently migrating to Godot 4. Published and available on Google Play.",
+    proProjectLink: "▸ View on Google Play",
+    proContactHeading: "Contact / Hire me"
   }
 };
 
+const topicsData = {
+  es: {
+    origen: {
+      participants: ["cerulis", "bastion"],
+      lines: [
+        { who: "cerulis", text: "¿Quieres saber quién construyó este lugar? Se llama Luis." },
+        { who: "bastion", text: "Empezó su camino en la contabilidad, no en el código." },
+        { who: "cerulis", text: "Pero encontró algo más vivo en HTML, CSS y JavaScript. Ahí dio sus primeros pasos." },
+        { who: "bastion", text: "Y ahora se aventura en Godot 4, aprendiendo a moldear reinos jugables desde cero." }
+      ]
+    },
+    minidemons: {
+      participants: ["azen", "cerulis"],
+      lines: [
+        { who: "azen", text: "¡MiniDemons! Ese es mi tema favorito. 21 demonias, cada una con su propia historia." },
+        { who: "cerulis", text: "Empezó en la web, con HTML y JavaScript puro." },
+        { who: "azen", text: "Y ahora lo está reconstruyendo todo en Godot, pieza por pieza, sistema por sistema." },
+        { who: "azen", text: "Pero no es solo una idea: ya puedes jugarlo. Está publicado en Google Play, disponible ahora mismo." }
+      ],
+      link: { text: "▸ Jugar MiniDemons en Google Play", url: "https://play.google.com/store/apps/details?id=com.roluam.minidemons" }
+    },
+    qa: {
+      participants: ["bastion", "windve"],
+      lines: [
+        { who: "bastion", text: "Yo protejo la calidad. Luis se formó en QA — testing manual, gestión de defectos, Jira." },
+        { who: "windve", text: "No solo construye: sabe encontrar las grietas antes que nadie más las note." },
+        { who: "bastion", text: "Esa mezcla, crear y también poner a prueba, es poco común. Y es valiosa." }
+      ]
+    },
+    metas: {
+      participants: ["windve", "wuja"],
+      lines: [
+        { who: "windve", text: "Sopla el viento del cambio... Luis está buscando nuevos horizontes, más allá de Chile." },
+        { who: "wuja", text: "Trabajo remoto, nuevos mercados, nuevas oportunidades." },
+        { who: "windve", text: "Está construyendo el camino paso a paso, sin apuro pero sin pausa." }
+      ]
+    },
+    contratar: {
+      participants: ["wuja", "azen"],
+      lines: [
+        { who: "wuja", text: "¿Quieres contratarlo? Puedes encontrarlo en Fiverr." },
+        { who: "azen", text: "Es honesto sobre lo que sabe y lo que está aprendiendo — no promete lo que no puede cumplir." },
+        { who: "wuja", text: "Eso, en este oficio, vale más de lo que parece." }
+      ],
+      link: { text: "▸ Ver perfil en Fiverr", url: "https://www.fiverr.com/" }
+    }
+  },
+  en: {
+    origen: {
+      participants: ["cerulis", "bastion"],
+      lines: [
+        { who: "cerulis", text: "Want to know who built this place? His name is Luis." },
+        { who: "bastion", text: "He started his path in accounting, not in code." },
+        { who: "cerulis", text: "But he found something more alive in HTML, CSS and JavaScript. That's where he took his first steps." },
+        { who: "bastion", text: "And now he's venturing into Godot 4, learning to shape playable realms from scratch." }
+      ]
+    },
+    minidemons: {
+      participants: ["azen", "cerulis"],
+      lines: [
+        { who: "azen", text: "MiniDemons! That's my favorite topic. 21 demonias, each with their own story." },
+        { who: "cerulis", text: "It started on the web, with plain HTML and JavaScript." },
+        { who: "azen", text: "And now he's rebuilding it all in Godot, piece by piece, system by system." },
+        { who: "azen", text: "But it's not just an idea: you can already play it. It's published on Google Play, available right now." }
+      ],
+      link: { text: "▸ Play MiniDemons on Google Play", url: "https://play.google.com/store/apps/details?id=com.roluam.minidemons" }
+    },
+    qa: {
+      participants: ["bastion", "windve"],
+      lines: [
+        { who: "bastion", text: "I protect quality. Luis trained in QA — manual testing, defect management, Jira." },
+        { who: "windve", text: "He doesn't just build: he knows how to find the cracks before anyone else notices them." },
+        { who: "bastion", text: "That mix, building and also testing, is rare. And valuable." }
+      ]
+    },
+    metas: {
+      participants: ["windve", "wuja"],
+      lines: [
+        { who: "windve", text: "The wind of change is blowing... Luis is looking for new horizons, beyond Chile." },
+        { who: "wuja", text: "Remote work, new markets, new opportunities." },
+        { who: "windve", text: "He's building the path step by step, unhurried but unstopping." }
+      ]
+    },
+    contratar: {
+      participants: ["wuja", "azen"],
+      lines: [
+        { who: "wuja", text: "Want to hire him? You can find him on Fiverr." },
+        { who: "azen", text: "He's honest about what he knows and what he's still learning — he doesn't promise what he can't deliver." },
+        { who: "wuja", text: "In this line of work, that's worth more than it seems." }
+      ],
+      link: { text: "▸ View profile on Fiverr", url: "https://www.fiverr.com/" }
+    }
+  }
+};
+
+let currentLang = "es";
 let currentTopic = "origen";
 let currentLine = 0;
 
@@ -353,6 +454,46 @@ const textEl = document.getElementById('dialogueText');
 const nextBtn = document.getElementById('nextBtn');
 const playLink = document.getElementById('playLink');
 const menuBtns = document.querySelectorAll('.menu-btn');
+const headerSubtitle = document.getElementById('headerSubtitle');
+const toggleViewBtn = document.getElementById('toggleViewBtn');
+const toggleBackBtn = document.getElementById('toggleBackBtn');
+const langBtn = document.getElementById('langBtn');
+const proRole = document.getElementById('proRole');
+const proDesc = document.getElementById('proDesc');
+const proSkillsHeading = document.getElementById('proSkillsHeading');
+const proProjectHeading = document.getElementById('proProjectHeading');
+const proProjectDesc = document.getElementById('proProjectDesc');
+const proProjectLink = document.getElementById('proProjectLink');
+const proContactHeading = document.getElementById('proContactHeading');
+
+function applyLanguage() {
+  const t = ui[currentLang];
+  headerSubtitle.textContent = t.headerSubtitle;
+  toggleViewBtn.textContent = t.toggleViewBtn;
+  toggleBackBtn.textContent = t.toggleBackBtn;
+  langBtn.textContent = t.langBtn;
+  proRole.textContent = t.proRole;
+  proDesc.textContent = t.proDesc;
+  proSkillsHeading.textContent = t.proSkillsHeading;
+  proProjectHeading.textContent = t.proProjectHeading;
+  proProjectDesc.textContent = t.proProjectDesc;
+  proProjectLink.textContent = t.proProjectLink;
+  proContactHeading.textContent = t.proContactHeading;
+
+  menuBtns.forEach(btn => {
+    btn.textContent = t.menuLabels[btn.dataset.topic];
+  });
+
+  loadTopic();
+}
+
+langBtn.addEventListener('click', () => {
+  currentLang = currentLang === 'es' ? 'en' : 'es';
+  currentTopic = 'origen';
+  currentLine = 0;
+  menuBtns.forEach(b => b.classList.toggle('active', b.dataset.topic === 'origen'));
+  applyLanguage();
+});
 
 menuBtns.forEach(btn => {
   btn.addEventListener('click', () => {
@@ -364,7 +505,7 @@ menuBtns.forEach(btn => {
 });
 
 function loadTopic() {
-  const topic = topics[currentTopic];
+  const topic = topicsData[currentLang][currentTopic];
   const [leftChar, rightChar] = topic.participants;
   imgLeft.src = charImages[leftChar];
   imgLeft.alt = charNames[leftChar];
@@ -376,7 +517,7 @@ function loadTopic() {
 }
 
 function renderLine() {
-  const topic = topics[currentTopic];
+  const topic = topicsData[currentLang][currentTopic];
   const line = topic.lines[currentLine];
   speakerEl.textContent = charNames[line.who];
   textEl.textContent = line.text;
@@ -389,7 +530,7 @@ function renderLine() {
   slotRight.classList.toggle('listening', line.who !== rightChar);
 
   const isLast = currentLine === topic.lines.length - 1;
-  nextBtn.textContent = isLast ? 'Fin ✓' : 'Continuar ▸';
+  nextBtn.textContent = isLast ? ui[currentLang].finBtn : ui[currentLang].continueBtn;
 
   if (topic.link && isLast) {
     playLink.href = topic.link.url;
@@ -401,7 +542,7 @@ function renderLine() {
 }
 
 nextBtn.addEventListener('click', () => {
-  const topic = topics[currentTopic];
+  const topic = topicsData[currentLang][currentTopic];
   if (currentLine < topic.lines.length - 1) {
     currentLine++;
     renderLine();
@@ -409,7 +550,7 @@ nextBtn.addEventListener('click', () => {
 });
 
 menuBtns[0].classList.add('active');
-loadTopic();
+applyLanguage();
 
 const bgm = document.getElementById('bgm');
 const musicBtn = document.getElementById('musicBtn');
@@ -429,8 +570,6 @@ musicBtn.addEventListener('click', () => {
 
 const sceneEl = document.querySelector('.scene');
 const proSection = document.getElementById('proSection');
-const toggleViewBtn = document.getElementById('toggleViewBtn');
-const toggleBackBtn = document.getElementById('toggleBackBtn');
 
 toggleViewBtn.addEventListener('click', () => {
   sceneEl.style.display = 'none';
