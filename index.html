@@ -71,23 +71,23 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    gap: 2vw;
+    gap: 1vw;
     z-index: 3;
+    padding: 0 2vw;
   }
   .npc {
-    height: 100%;
-    display: flex;
-    align-items: flex-end;
+    width: 15vw;
+    max-width: 175px;
+    min-width: 100px;
+    flex-shrink: 1;
     cursor: pointer;
     transition: filter 0.4s ease, transform 0.4s ease, opacity 0.4s ease;
     filter: brightness(0.4) saturate(0.5);
     opacity: 0.75;
   }
   .npc img {
-    height: 100%;
-    max-height: 640px;
-    width: auto;
-    object-fit: contain;
+    width: 100%;
+    height: auto;
     display: block;
   }
   .npc:hover { filter: brightness(0.6) saturate(0.7); opacity: 0.9; }
@@ -181,6 +181,7 @@
   <header>
     <h1>LMdev</h1>
     <p>Un rincón de mi historia, contado por otros.</p>
+    <button id="toggleViewBtn" style="margin-top:10px; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.4); color:#fff; padding:7px 14px; border-radius:8px; cursor:pointer; font-family:inherit; font-size:12px; backdrop-filter: blur(4px);">📄 Ver versión profesional</button>
   </header>
 
   <p class="hint">Toca a un personaje</p>
@@ -226,6 +227,44 @@
     <a href="https://github.com/LuisMndev" target="_blank">GitHub</a>
   </footer>
 
+</div>
+
+<div id="proSection" style="display:none; min-height:100vh; background:#0d0a1a; padding:50px 6% 60px; font-family: Georgia, serif;">
+  <div style="max-width:820px; margin:0 auto;">
+    <button id="toggleBackBtn" style="background:rgba(185,131,255,0.15); border:1px solid rgba(185,131,255,0.5); color:#f0ecff; padding:8px 16px; border-radius:8px; cursor:pointer; font-family:inherit; font-size:13px; margin-bottom:30px;">🎮 Ver como novela visual</button>
+
+    <h1 style="color:#fff; font-size:34px; letter-spacing:1px;">LMdev</h1>
+    <p style="color:#c9a8ff; font-size:16px; margin-top:6px;">Web & Godot Game Developer</p>
+    <p style="color:#b3a9cc; font-size:15px; line-height:1.6; margin-top:18px; max-width:600px;">
+      Developer with a solid foundation in HTML, CSS and JavaScript, currently expanding into game development with Godot 4. Creator of MiniDemons, an idle/clicker game featuring deep progression systems and multilingual content. QA-trained (manual testing, Jira, ISTQB CTFL fundamentals). Available for freelance web development, Godot prototyping, and QA testing.
+    </p>
+
+    <h2 style="color:#fff; font-size:20px; margin-top:40px; border-bottom:1px solid rgba(255,255,255,0.15); padding-bottom:10px;">Skills</h2>
+    <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:16px;">
+      <span style="background:rgba(185,131,255,0.15); color:#e0d4ff; padding:6px 14px; border-radius:20px; font-size:13px; border:1px solid rgba(185,131,255,0.35);">HTML5</span>
+      <span style="background:rgba(185,131,255,0.15); color:#e0d4ff; padding:6px 14px; border-radius:20px; font-size:13px; border:1px solid rgba(185,131,255,0.35);">CSS3</span>
+      <span style="background:rgba(185,131,255,0.15); color:#e0d4ff; padding:6px 14px; border-radius:20px; font-size:13px; border:1px solid rgba(185,131,255,0.35);">JavaScript</span>
+      <span style="background:rgba(185,131,255,0.15); color:#e0d4ff; padding:6px 14px; border-radius:20px; font-size:13px; border:1px solid rgba(185,131,255,0.35);">Godot 4 / GDScript</span>
+      <span style="background:rgba(185,131,255,0.15); color:#e0d4ff; padding:6px 14px; border-radius:20px; font-size:13px; border:1px solid rgba(185,131,255,0.35);">QA Testing</span>
+      <span style="background:rgba(185,131,255,0.15); color:#e0d4ff; padding:6px 14px; border-radius:20px; font-size:13px; border:1px solid rgba(185,131,255,0.35);">Jira</span>
+    </div>
+
+    <h2 style="color:#fff; font-size:20px; margin-top:40px; border-bottom:1px solid rgba(255,255,255,0.15); padding-bottom:10px;">Featured project</h2>
+    <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.12); border-radius:12px; padding:20px 24px; margin-top:16px;">
+      <p style="color:#fff; font-size:17px; font-weight:bold;">MiniDemons</p>
+      <p style="color:#b3a9cc; font-size:14px; line-height:1.6; margin-top:8px;">
+        Idle/clicker game with 21 characters, deep progression systems and multilingual content (ES/EN/JA). Originally built in HTML/CSS/JS, currently migrating to Godot 4. Published and available on Google Play.
+      </p>
+      <a href="https://play.google.com/store/apps/details?id=com.roluam.minidemons" target="_blank" style="display:inline-block; margin-top:12px; color:#c9a8ff; font-size:14px; text-decoration:none;">▸ Ver en Google Play</a>
+    </div>
+
+    <h2 style="color:#fff; font-size:20px; margin-top:40px; border-bottom:1px solid rgba(255,255,255,0.15); padding-bottom:10px;">Contact / Hire me</h2>
+    <div style="display:flex; gap:14px; margin-top:16px; flex-wrap:wrap;">
+      <a href="https://www.fiverr.com/" target="_blank" style="background:rgba(185,131,255,0.15); color:#f0ecff; padding:9px 20px; border-radius:8px; text-decoration:none; font-size:14px; border:1px solid rgba(185,131,255,0.4);">Fiverr</a>
+      <a href="https://www.upwork.com/" target="_blank" style="background:rgba(185,131,255,0.15); color:#f0ecff; padding:9px 20px; border-radius:8px; text-decoration:none; font-size:14px; border:1px solid rgba(185,131,255,0.4);">Upwork</a>
+      <a href="https://github.com/LuisMndev" target="_blank" style="background:rgba(185,131,255,0.15); color:#f0ecff; padding:9px 20px; border-radius:8px; text-decoration:none; font-size:14px; border:1px solid rgba(185,131,255,0.4);">GitHub</a>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -277,6 +316,21 @@ const stories = {
 
 let currentChar = null;
 let currentLine = 0;
+
+const sceneEl = document.querySelector('.scene');
+const proSection = document.getElementById('proSection');
+const toggleViewBtn = document.getElementById('toggleViewBtn');
+const toggleBackBtn = document.getElementById('toggleBackBtn');
+
+toggleViewBtn.addEventListener('click', () => {
+  sceneEl.style.display = 'none';
+  proSection.style.display = 'block';
+});
+
+toggleBackBtn.addEventListener('click', () => {
+  proSection.style.display = 'none';
+  sceneEl.style.display = 'block';
+});
 
 const bgm = document.getElementById('bgm');
 const musicBtn = document.getElementById('musicBtn');
