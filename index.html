@@ -5,197 +5,228 @@
 <title>LMdev — Portfolio</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
   body {
-    background: radial-gradient(ellipse at top, #1a1530 0%, #0d0a1a 60%, #050408 100%);
-    min-height: 100vh;
     font-family: 'Georgia', serif;
-    color: #e8e3f5;
+    color: #f0ecff;
     overflow-x: hidden;
     position: relative;
   }
-  .stars {
-    position: fixed; inset: 0; pointer-events: none;
-    background-image:
-      radial-gradient(1px 1px at 20% 30%, white, transparent),
-      radial-gradient(1px 1px at 60% 70%, white, transparent),
-      radial-gradient(1px 1px at 80% 20%, white, transparent),
-      radial-gradient(1px 1px at 40% 80%, white, transparent),
-      radial-gradient(2px 2px at 90% 50%, white, transparent);
-    background-size: 400px 400px;
-    opacity: 0.4;
-  }
-  header {
-    text-align: center;
-    padding: 50px 20px 20px;
-    position: relative;
-    z-index: 2;
-  }
-  header h1 {
-    font-size: 42px;
-    color: #b983ff;
-    letter-spacing: 4px;
-    text-shadow: 0 0 20px rgba(185,131,255,0.5);
-  }
-  header p {
-    color: #a99fc7;
-    margin-top: 8px;
-    font-size: 15px;
-    letter-spacing: 1px;
-  }
-  .hint {
-    text-align: center;
-    color: #8a7fb0;
-    font-size: 13px;
-    margin-bottom: 10px;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse { 0%,100%{opacity:0.5;} 50%{opacity:1;} }
   .scene {
     position: relative;
-    height: 340px;
-    max-width: 900px;
-    margin: 0 auto;
-    border-bottom: 2px solid rgba(185,131,255,0.2);
-    overflow: hidden;
-    z-index: 2;
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
+    background: url('assets/Background.png') center center / cover no-repeat;
   }
-  .npc {
+  .scene::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(10,8,20,0.15) 0%, rgba(10,8,20,0.0) 30%, rgba(10,8,20,0.75) 100%);
+  }
+  header {
+    position: absolute;
+    top: 24px;
+    left: 30px;
+    z-index: 5;
+  }
+  header h1 {
+    font-size: 30px;
+    color: #ffffff;
+    letter-spacing: 3px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  }
+  header p {
+    color: #e8e3f5;
+    font-size: 13px;
+    margin-top: 4px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+  }
+  .hint {
+    position: absolute;
+    top: 24px;
+    right: 90px;
+    z-index: 5;
+    color: #e8e3f5;
+    font-size: 13px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:0.6;} 50%{opacity:1;} }
+
+  #musicBtn {
+    position: absolute; top: 20px; right: 20px; z-index: 10;
+    background: rgba(20,15,35,0.6); border: 1px solid rgba(185,131,255,0.6);
+    color: #f0ecff; padding: 8px 14px; border-radius: 8px; cursor: pointer;
+    font-family: inherit; font-size: 13px; backdrop-filter: blur(4px);
+  }
+
+  .cast {
     position: absolute;
     bottom: 0;
-    width: 130px;
-    cursor: pointer;
-    transition: filter 0.2s;
-    filter: drop-shadow(0 0 8px rgba(185,131,255,0.15));
-  }
-  .npc:hover { filter: drop-shadow(0 0 16px rgba(185,131,255,0.6)); }
-  .npc img { width: 100%; display: block; }
-  .npc .name-tag {
-    text-align: center;
-    font-size: 12px;
-    color: #d4c8f0;
-    background: rgba(20,15,35,0.7);
-    border: 1px solid rgba(185,131,255,0.3);
-    border-radius: 6px;
-    padding: 2px 6px;
-    margin-bottom: 4px;
-  }
-  #cerulis { left: 5%; animation: patrol1 9s ease-in-out infinite; }
-  #azen { left: 25%; animation: patrol2 7s ease-in-out infinite; }
-  #bastion { left: 45%; animation: patrol3 10s ease-in-out infinite; }
-  #windve { left: 65%; animation: patrol1 8s ease-in-out infinite reverse; }
-  #wuja { left: 82%; animation: patrol2 6.5s ease-in-out infinite reverse; }
-
-  @keyframes patrol1 { 0%,100% { transform: translateX(0); } 50% { transform: translateX(30px); } }
-  @keyframes patrol2 { 0%,100% { transform: translateX(0); } 50% { transform: translateX(-25px); } }
-  @keyframes patrol3 { 0%,100% { transform: translateX(0); } 50% { transform: translateX(20px); } }
-
-  .dialogue-box {
-    max-width: 700px;
-    margin: 20px auto 60px;
-    background: rgba(20,15,35,0.9);
-    border: 1px solid rgba(185,131,255,0.4);
-    border-radius: 12px;
-    padding: 24px 28px;
-    display: none;
-    position: relative;
+    left: 0;
+    right: 0;
+    height: 78%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 2vw;
     z-index: 3;
   }
-  .dialogue-box.active { display: block; }
-  .speaker {
-    color: #b983ff;
-    font-size: 14px;
+  .npc {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    cursor: pointer;
+    transition: filter 0.4s ease, transform 0.4s ease, opacity 0.4s ease;
+    filter: brightness(0.4) saturate(0.5);
+    opacity: 0.75;
+  }
+  .npc img {
+    height: 100%;
+    max-height: 640px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
+  .npc:hover { filter: brightness(0.6) saturate(0.7); opacity: 0.9; }
+  .npc.speaking {
+    filter: brightness(1) saturate(1);
+    opacity: 1;
+    transform: translateY(-6px) scale(1.02);
+    z-index: 4;
+  }
+
+  .dialogue-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 6;
+    padding: 0 5% 30px;
+    display: none;
+  }
+  .dialogue-wrap.active { display: block; }
+  .speaker-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, #7f5fd6, #4a3792);
+    color: #fff;
+    font-size: 15px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    padding: 8px 22px;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+  }
+  .dialogue-box {
+    background: rgba(12,9,24,0.88);
+    border: 1px solid rgba(185,131,255,0.35);
+    border-radius: 0 12px 12px 12px;
+    padding: 22px 28px;
+    backdrop-filter: blur(6px);
   }
   .dialogue-text {
-    font-size: 17px;
+    font-size: 18px;
     line-height: 1.6;
-    color: #e8e3f5;
-    min-height: 60px;
+    color: #f0ecff;
+    min-height: 55px;
+  }
+  .play-link {
+    display: none;
+    color: #c9a8ff;
+    font-size: 14px;
+    text-decoration: none;
+    margin-top: 10px;
+    font-weight: bold;
   }
   .controls {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
-    margin-top: 16px;
+    margin-top: 14px;
   }
   .controls button {
-    background: rgba(185,131,255,0.15);
+    background: rgba(185,131,255,0.18);
     border: 1px solid rgba(185,131,255,0.5);
-    color: #d4c8f0;
+    color: #f0ecff;
     padding: 8px 18px;
     border-radius: 6px;
     cursor: pointer;
     font-family: inherit;
     font-size: 14px;
   }
-  .controls button:hover { background: rgba(185,131,255,0.3); }
+  .controls button:hover { background: rgba(185,131,255,0.32); }
+
   footer {
-    text-align: center;
-    padding: 30px 20px 50px;
-    color: #6f6590;
-    font-size: 13px;
-    position: relative;
-    z-index: 2;
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    z-index: 7;
+    font-size: 12px;
   }
-  footer a { color: #b983ff; text-decoration: none; margin: 0 10px; }
+  footer a { color: #c9a8ff; text-decoration: none; margin-left: 14px; }
+
+  @media (max-width: 700px) {
+    .cast { gap: 0; }
+    header h1 { font-size: 22px; }
+    .hint { display: none; }
+  }
 </style>
 </head>
 <body>
 
-<div class="stars"></div>
-
-<header>
-  <h1>LMdev</h1>
-  <p>Un rincón de mi historia, contado por otros.</p>
-</header>
-
-<p class="hint">Toca a un personaje para que te cuente algo</p>
-
-<audio id="bgm" loop>
-  <source src="assets/music/Untitled.mp3" type="audio/mpeg">
-</audio>
-<button id="musicBtn" style="position:fixed; top:20px; right:20px; z-index:10; background:rgba(185,131,255,0.15); border:1px solid rgba(185,131,255,0.5); color:#d4c8f0; padding:10px 16px; border-radius:8px; cursor:pointer; font-family:inherit; font-size:14px;">🎵 Activar música</button>
-
 <div class="scene">
-  <div class="npc" id="cerulis" data-char="cerulis">
-    <div class="name-tag">Cerulis</div>
-    <img src="assets/characters/Cerulis_stickerV2.png" alt="Cerulis">
-  </div>
-  <div class="npc" id="azen" data-char="azen">
-    <div class="name-tag">Azen</div>
-    <img src="assets/characters/Azen_sticker.png" alt="Azen">
-  </div>
-  <div class="npc" id="bastion" data-char="bastion">
-    <div class="name-tag">Bastion</div>
-    <img src="assets/characters/Bastion_stickerV2.png" alt="Bastion">
-  </div>
-  <div class="npc" id="windve" data-char="windve">
-    <div class="name-tag">Windve</div>
-    <img src="assets/characters/Windve_stickerV2.png" alt="Windve">
-  </div>
-  <div class="npc" id="wuja" data-char="wuja">
-    <div class="name-tag">Wuja</div>
-    <img src="assets/characters/Wuja_sticker.png" alt="Wuja">
-  </div>
-</div>
 
-<div class="dialogue-box" id="dialogueBox">
-  <div class="speaker" id="speakerName">???</div>
-  <div class="dialogue-text" id="dialogueText"></div>
-  <a id="playLink" href="#" target="_blank" style="display:none; color:#b983ff; font-size:14px; text-decoration:none; margin-top:10px; display:none;"></a>
-  <div class="controls">
-    <button id="nextBtn">Continuar ▸</button>
-    <button id="closeBtn">Cerrar</button>
-  </div>
-</div>
+  <header>
+    <h1>LMdev</h1>
+    <p>Un rincón de mi historia, contado por otros.</p>
+  </header>
 
-<footer>
-  <a href="https://www.fiverr.com/" target="_blank">Fiverr</a>
-  <a href="https://www.upwork.com/" target="_blank">Upwork</a>
-  <a href="https://github.com/LuisMndev" target="_blank">GitHub</a>
-</footer>
+  <p class="hint">Toca a un personaje</p>
+  <button id="musicBtn">🎵 Activar música</button>
+
+  <audio id="bgm" loop>
+    <source src="assets/music/Untitled.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="cast">
+    <div class="npc" id="cerulis" data-char="cerulis">
+      <img src="assets/characters/Cerulis_stickerV2.png" alt="Cerulis">
+    </div>
+    <div class="npc" id="azen" data-char="azen">
+      <img src="assets/characters/Azen_sticker.png" alt="Azen">
+    </div>
+    <div class="npc" id="bastion" data-char="bastion">
+      <img src="assets/characters/Bastion_stickerV2.png" alt="Bastion">
+    </div>
+    <div class="npc" id="windve" data-char="windve">
+      <img src="assets/characters/Windve_stickerV2.png" alt="Windve">
+    </div>
+    <div class="npc" id="wuja" data-char="wuja">
+      <img src="assets/characters/Wuja_sticker.png" alt="Wuja">
+    </div>
+  </div>
+
+  <div class="dialogue-wrap" id="dialogueWrap">
+    <div class="speaker-tag" id="speakerName">???</div>
+    <div class="dialogue-box">
+      <div class="dialogue-text" id="dialogueText"></div>
+      <a id="playLink" class="play-link" href="#" target="_blank"></a>
+      <div class="controls">
+        <button id="nextBtn">Continuar ▸</button>
+        <button id="closeBtn">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <a href="https://www.fiverr.com/" target="_blank">Fiverr</a>
+    <a href="https://www.upwork.com/" target="_blank">Upwork</a>
+    <a href="https://github.com/LuisMndev" target="_blank">GitHub</a>
+  </footer>
+
+</div>
 
 <script>
 const stories = {
@@ -263,13 +294,15 @@ musicBtn.addEventListener('click', () => {
   musicPlaying = !musicPlaying;
 });
 
-const box = document.getElementById('dialogueBox');
+const wrap = document.getElementById('dialogueWrap');
 const speakerEl = document.getElementById('speakerName');
 const textEl = document.getElementById('dialogueText');
 const nextBtn = document.getElementById('nextBtn');
 const closeBtn = document.getElementById('closeBtn');
+const playLink = document.getElementById('playLink');
+const allNpcs = document.querySelectorAll('.npc');
 
-document.querySelectorAll('.npc').forEach(npc => {
+allNpcs.forEach(npc => {
   npc.addEventListener('click', () => {
     currentChar = npc.dataset.char;
     currentLine = 0;
@@ -277,16 +310,19 @@ document.querySelectorAll('.npc').forEach(npc => {
   });
 });
 
-const playLink = document.getElementById('playLink');
-
 function openDialogue() {
   const story = stories[currentChar];
+  allNpcs.forEach(npc => npc.classList.toggle('speaking', npc.dataset.char === currentChar));
   speakerEl.textContent = story.name;
   textEl.textContent = story.lines[currentLine];
-  box.classList.add('active');
-  box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  wrap.classList.add('active');
   updateNextLabel();
   updateLink(story);
+}
+
+function updateNextLabel() {
+  const story = stories[currentChar];
+  nextBtn.textContent = currentLine < story.lines.length - 1 ? 'Continuar ▸' : 'Fin ✓';
 }
 
 function updateLink(story) {
@@ -300,11 +336,6 @@ function updateLink(story) {
   }
 }
 
-function updateNextLabel() {
-  const story = stories[currentChar];
-  nextBtn.textContent = currentLine < story.lines.length - 1 ? 'Continuar ▸' : 'Fin ✓';
-}
-
 nextBtn.addEventListener('click', () => {
   const story = stories[currentChar];
   if (currentLine < story.lines.length - 1) {
@@ -313,13 +344,17 @@ nextBtn.addEventListener('click', () => {
     updateNextLabel();
     updateLink(story);
   } else {
-    box.classList.remove('active');
+    closeDialogue();
   }
 });
 
-closeBtn.addEventListener('click', () => {
-  box.classList.remove('active');
-});
+closeBtn.addEventListener('click', closeDialogue);
+
+function closeDialogue() {
+  wrap.classList.remove('active');
+  allNpcs.forEach(npc => npc.classList.remove('speaking'));
+  currentChar = null;
+}
 </script>
 
 </body>
