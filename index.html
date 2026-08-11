@@ -16,7 +16,7 @@
     position: relative;
     width: 100%;
     height: 100vh;
-    min-height: 600px;
+    min-height: 640px;
     background: url('assets/Background.png') center center / cover no-repeat;
   }
   .scene::after {
@@ -24,6 +24,7 @@
     position: absolute;
     inset: 0;
     background: linear-gradient(to bottom, rgba(10,8,20,0.2) 0%, rgba(10,8,20,0.0) 30%, rgba(10,8,20,0.8) 100%);
+    pointer-events: none;
   }
   header {
     position: absolute;
@@ -55,141 +56,125 @@
     font-family: inherit; font-size: 13px; backdrop-filter: blur(4px);
   }
 
-  .menu-wrap {
-    position: absolute;
-    inset: 0;
-    z-index: 4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 16px;
-    padding: 20px;
-  }
-  .menu-wrap.hidden { display: none; }
-  .menu-title {
-    color: #fff;
-    font-size: 20px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-    margin-bottom: 8px;
-  }
-  .menu-btn {
-    background: rgba(12,9,24,0.75);
-    border: 1px solid rgba(185,131,255,0.5);
-    color: #f0ecff;
-    padding: 14px 34px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 16px;
-    width: min(420px, 80vw);
-    backdrop-filter: blur(4px);
-    transition: background 0.2s, border-color 0.2s;
-  }
-  .menu-btn:hover { background: rgba(185,131,255,0.25); border-color: rgba(185,131,255,0.9); }
-
-  .convo-wrap {
-    position: absolute;
-    inset: 0;
-    z-index: 4;
-    display: none;
-  }
-  .convo-wrap.active { display: block; }
-
   .cast-duo {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 80%;
-    z-index: 3;
+    height: 82%;
+    z-index: 2;
   }
   .npc-slot {
     position: absolute;
     bottom: 0;
-    width: 26vw;
-    max-width: 320px;
-    min-width: 160px;
+    width: 24vw;
+    max-width: 300px;
+    min-width: 150px;
     display: flex;
     justify-content: center;
-    transition: transform 0.4s ease;
+    transition: transform 0.35s ease;
   }
-  .npc-slot.left { left: 4%; }
-  .npc-slot.right { right: 4%; }
+  .npc-slot.left { left: 3%; }
+  .npc-slot.right { right: 3%; }
   .npc-slot img {
     width: 100%;
     height: auto;
     display: block;
-    transition: filter 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+    transition: filter 0.35s ease, opacity 0.35s ease, transform 0.35s ease;
     filter: brightness(0.35) saturate(0.4);
-    opacity: 0.7;
+    opacity: 0.65;
   }
   .npc-slot.speaking { z-index: 2; }
   .npc-slot.speaking img {
     filter: brightness(1) saturate(1);
     opacity: 1;
-    transform: scale(1.08) translateY(-8px);
+    transform: scale(1.06) translateY(-6px);
   }
-  .npc-slot.listening { z-index: 1; }
   .npc-slot.listening img { transform: scale(0.9); }
 
-  .dialogue-wrap {
+  .center-panel {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 6;
-    padding: 0 5% 30px;
+    width: min(480px, 60vw);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .menu-title {
+    color: #fff;
+    font-size: 17px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    margin-bottom: 6px;
+    text-align: center;
+  }
+  .menu-btn {
+    background: rgba(12,9,24,0.75);
+    border: 1px solid rgba(185,131,255,0.4);
+    color: #f0ecff;
+    padding: 11px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    backdrop-filter: blur(4px);
+    transition: background 0.2s, border-color 0.2s;
+    text-align: left;
+  }
+  .menu-btn:hover { background: rgba(185,131,255,0.22); border-color: rgba(185,131,255,0.8); }
+  .menu-btn.active { background: rgba(185,131,255,0.35); border-color: rgba(185,131,255,1); }
+
+  .dialogue-panel {
+    margin-top: 10px;
+    background: rgba(12,9,24,0.9);
+    border: 1px solid rgba(185,131,255,0.4);
+    border-radius: 10px;
+    padding: 16px 20px;
+    backdrop-filter: blur(6px);
   }
   .speaker-tag {
     display: inline-block;
     background: linear-gradient(135deg, #7f5fd6, #4a3792);
     color: #fff;
-    font-size: 15px;
-    letter-spacing: 2px;
+    font-size: 12px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    padding: 8px 22px;
-    border-radius: 8px 8px 0 0;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
-  }
-  .dialogue-box {
-    background: rgba(12,9,24,0.88);
-    border: 1px solid rgba(185,131,255,0.35);
-    border-radius: 0 12px 12px 12px;
-    padding: 22px 28px;
-    backdrop-filter: blur(6px);
+    padding: 4px 14px;
+    border-radius: 6px;
+    margin-bottom: 8px;
   }
   .dialogue-text {
-    font-size: 18px;
-    line-height: 1.6;
+    font-size: 15px;
+    line-height: 1.55;
     color: #f0ecff;
-    min-height: 55px;
+    min-height: 44px;
   }
   .play-link {
     display: none;
     color: #c9a8ff;
-    font-size: 14px;
+    font-size: 13px;
     text-decoration: none;
-    margin-top: 10px;
+    margin-top: 8px;
     font-weight: bold;
   }
-  .controls {
+  .dialogue-controls {
     display: flex;
     justify-content: flex-end;
-    gap: 10px;
-    margin-top: 14px;
+    margin-top: 10px;
   }
-  .controls button {
+  .dialogue-controls button {
     background: rgba(185,131,255,0.18);
     border: 1px solid rgba(185,131,255,0.5);
     color: #f0ecff;
-    padding: 8px 18px;
+    padding: 7px 16px;
     border-radius: 6px;
     cursor: pointer;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 13px;
   }
-  .controls button:hover { background: rgba(185,131,255,0.32); }
+  .dialogue-controls button:hover { background: rgba(185,131,255,0.32); }
 
   footer {
     position: absolute;
@@ -202,7 +187,8 @@
 
   @media (max-width: 700px) {
     header h1 { font-size: 22px; }
-    .npc-slot { width: 44vw; }
+    .npc-slot { width: 30vw; }
+    .center-panel { width: 82vw; }
   }
 </style>
 </head>
@@ -222,37 +208,31 @@
     <source src="assets/music/Town.mp3" type="audio/mpeg">
   </audio>
 
-  <div class="menu-wrap" id="menuWrap">
+  <div class="cast-duo">
+    <div class="npc-slot left" id="slotLeft"><img id="imgLeft" src="" alt=""></div>
+    <div class="npc-slot right" id="slotRight"><img id="imgRight" src="" alt=""></div>
+  </div>
+
+  <div class="center-panel">
     <p class="menu-title">¿Qué quieres saber?</p>
     <button class="menu-btn" data-topic="origen">¿Quién es Luis?</button>
     <button class="menu-btn" data-topic="minidemons">El proyecto MiniDemons</button>
     <button class="menu-btn" data-topic="qa">Su formación en QA</button>
     <button class="menu-btn" data-topic="metas">Hacia dónde va</button>
     <button class="menu-btn" data-topic="contratar">¿Cómo contratarlo?</button>
-  </div>
 
-  <div class="convo-wrap" id="convoWrap">
-    <div class="cast-duo">
-      <div class="npc-slot left" id="slotLeft"><img id="imgLeft" src="" alt=""></div>
-      <div class="npc-slot right" id="slotRight"><img id="imgRight" src="" alt=""></div>
-    </div>
-
-    <div class="dialogue-wrap">
+    <div class="dialogue-panel">
       <div class="speaker-tag" id="speakerName">???</div>
-      <div class="dialogue-box">
-        <div class="dialogue-text" id="dialogueText"></div>
-        <a id="playLink" class="play-link" href="#" target="_blank"></a>
-        <div class="controls">
-          <button id="nextBtn">Continuar ▸</button>
-          <button id="menuBtn">◂ Volver al menú</button>
-        </div>
+      <div class="dialogue-text" id="dialogueText">Elige un tema arriba para empezar.</div>
+      <a id="playLink" class="play-link" href="#" target="_blank"></a>
+      <div class="dialogue-controls">
+        <button id="nextBtn">Continuar ▸</button>
       </div>
     </div>
   </div>
 
   <footer>
-    <a href="https://www.fiverr.com/" target="_blank">Fiverr</a>
-    <a href="https://www.upwork.com/" target="_blank">Upwork</a>
+    <a href="https://www.fiverr.com/" target="_blank" id="fiverrLink1">Fiverr</a>
     <a href="https://github.com/LuisMndev" target="_blank">GitHub</a>
   </footer>
 
@@ -289,8 +269,7 @@
 
     <h2 style="color:#fff; font-size:20px; margin-top:40px; border-bottom:1px solid rgba(255,255,255,0.15); padding-bottom:10px;">Contact / Hire me</h2>
     <div style="display:flex; gap:14px; margin-top:16px; flex-wrap:wrap;">
-      <a href="https://www.fiverr.com/" target="_blank" style="background:rgba(185,131,255,0.15); color:#f0ecff; padding:9px 20px; border-radius:8px; text-decoration:none; font-size:14px; border:1px solid rgba(185,131,255,0.4);">Fiverr</a>
-      <a href="https://www.upwork.com/" target="_blank" style="background:rgba(185,131,255,0.15); color:#f0ecff; padding:9px 20px; border-radius:8px; text-decoration:none; font-size:14px; border:1px solid rgba(185,131,255,0.4);">Upwork</a>
+      <a href="https://www.fiverr.com/" target="_blank" id="fiverrLink2" style="background:rgba(185,131,255,0.15); color:#f0ecff; padding:9px 20px; border-radius:8px; text-decoration:none; font-size:14px; border:1px solid rgba(185,131,255,0.4);">Fiverr</a>
       <a href="https://github.com/LuisMndev" target="_blank" style="background:rgba(185,131,255,0.15); color:#f0ecff; padding:9px 20px; border-radius:8px; text-decoration:none; font-size:14px; border:1px solid rgba(185,131,255,0.4);">GitHub</a>
     </div>
   </div>
@@ -352,18 +331,17 @@ const topics = {
   contratar: {
     participants: ["wuja", "azen"],
     lines: [
-      { who: "wuja", text: "¿Quieres contratarlo? Puedes encontrarlo en Fiverr y Upwork." },
+      { who: "wuja", text: "¿Quieres contratarlo? Puedes encontrarlo en Fiverr." },
       { who: "azen", text: "Es honesto sobre lo que sabe y lo que está aprendiendo — no promete lo que no puede cumplir." },
       { who: "wuja", text: "Eso, en este oficio, vale más de lo que parece." }
-    ]
+    ],
+    link: { text: "▸ Ver perfil en Fiverr", url: "https://www.fiverr.com/" }
   }
 };
 
-let currentTopic = null;
+let currentTopic = "origen";
 let currentLine = 0;
 
-const menuWrap = document.getElementById('menuWrap');
-const convoWrap = document.getElementById('convoWrap');
 const slotLeft = document.getElementById('slotLeft');
 const slotRight = document.getElementById('slotRight');
 const imgLeft = document.getElementById('imgLeft');
@@ -371,18 +349,19 @@ const imgRight = document.getElementById('imgRight');
 const speakerEl = document.getElementById('speakerName');
 const textEl = document.getElementById('dialogueText');
 const nextBtn = document.getElementById('nextBtn');
-const menuBtn = document.getElementById('menuBtn');
 const playLink = document.getElementById('playLink');
+const menuBtns = document.querySelectorAll('.menu-btn');
 
-document.querySelectorAll('.menu-btn').forEach(btn => {
+menuBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     currentTopic = btn.dataset.topic;
     currentLine = 0;
-    startConvo();
+    menuBtns.forEach(b => b.classList.toggle('active', b === btn));
+    loadTopic();
   });
 });
 
-function startConvo() {
+function loadTopic() {
   const topic = topics[currentTopic];
   const [leftChar, rightChar] = topic.participants;
   imgLeft.src = charImages[leftChar];
@@ -391,9 +370,6 @@ function startConvo() {
   imgRight.alt = charNames[rightChar];
   slotLeft.dataset.char = leftChar;
   slotRight.dataset.char = rightChar;
-
-  menuWrap.classList.add('hidden');
-  convoWrap.classList.add('active');
   renderLine();
 }
 
@@ -427,20 +403,11 @@ nextBtn.addEventListener('click', () => {
   if (currentLine < topic.lines.length - 1) {
     currentLine++;
     renderLine();
-  } else {
-    backToMenu();
   }
 });
 
-menuBtn.addEventListener('click', backToMenu);
-
-function backToMenu() {
-  convoWrap.classList.remove('active');
-  menuWrap.classList.remove('hidden');
-  slotLeft.classList.remove('speaking', 'listening');
-  slotRight.classList.remove('speaking', 'listening');
-  currentTopic = null;
-}
+menuBtns[0].classList.add('active');
+loadTopic();
 
 const bgm = document.getElementById('bgm');
 const musicBtn = document.getElementById('musicBtn');
